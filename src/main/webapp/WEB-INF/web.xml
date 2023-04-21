@@ -3,4 +3,27 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
          version="4.0">
+
+    <!-- 配置登录 Servlet -->
+    <servlet>
+        <servlet-name>LoginServlet</servlet-name>
+        <servlet-class>com.example.second_test.LoginServlet</servlet-class>
+    </servlet>
+
+    <!-- 配置登录 Servlet 的映射路径 -->
+    <servlet-mapping>
+        <servlet-name>LoginServlet</servlet-name>
+        <url-pattern>/LoginServlet</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>SurveyServlet</servlet-name>
+        <servlet-class>com.example.second_test.SurveyServlet</servlet-class>
+    </servlet>
+
+    <!-- 配置登录 Servlet 的映射路径 -->
+    <servlet-mapping>
+        <servlet-name>SurveyServlet</servlet-name>
+        <url-pattern>/SurveyServlet</url-pattern>
+    </servlet-mapping>
 </web-app>

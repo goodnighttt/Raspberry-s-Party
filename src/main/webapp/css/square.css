@@ -1,0 +1,42 @@
+body{background-color: aliceblue;font-size: 30px;}
+img{border-radius: 2px;}
+
+/* 导航栏 */
+#navigation{display: flex;flex-direction: row;justify-content: space-between;align-items: center;background-color: #e2706a;color: white;padding: 10px 50px;}
+
+#appLOGO{display: flex;flex-direction: row;align-items: center;}
+#appPic{border-radius: 50%;width: 50px;height: 50px;margin-right: 10px;}
+
+#bars{display: flex;flex-direction: row;width: 300px;justify-content: space-between;}
+
+#profile{display: flex;flex-direction: row;align-items: center;}
+#searchIcon{border-radius: 50%;width: 30px;height: 30px;}
+
+/* 首页图 */
+#fourPic{display: flex;flex-direction: row;justify-content: space-around;padding: 0 300px;}
+.oneOfFour{width: 300px;height:200px;z-index: 10;margin: -50px 20px 0 20px;}
+
+/* 首页主要内容 */
+#squareContent{margin: 0 240px;display: flex;flex-direction: row;}
+#main{width: 1400px;margin-left: 70px;}
+#titles{display: flex;flex-direction: row;justify-content: flex-start;}
+.titleChoice{padding: 30px 30px 10px 30px;}
+/* 星座运势 */
+/* #constellation{margin-right: 50px;background-color: white;padding: 10px 30px 20px 30px;margin-bottom: 30px;}
+#consTitles{display: flex;flex-direction: row;justify-content: space-between;align-items: center;margin-top: 10px;}
+#consTitleDate{display: flex;flex-direction: row;justify-content: flex-start;}
+#consTitle{font-size: 30px;font-weight: bold;margin-right:30px ;}
+#consContent{display: flex;flex-direction: row;}
+#consPic{width: 160px;height: 160px;margin-top: 10px;margin-right: 20px;}
+#consDetail{margin-top: 20px;} */
+
+/* 用户发表内容 */
+
+
+
+/* 首页侧边内容 */
+#side{width: 30%;margin-top: 80px;}
+.sidePic{width: 200px;height: 150px;}
+
+
+

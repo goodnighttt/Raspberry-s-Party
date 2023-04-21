@@ -1,0 +1,200 @@
+<%--
+  Created by IntelliJ IDEA.
+  User: 23605
+  Date: 2023/4/7
+  Time: 12:18
+  To change this template use File | Settings | File Templates.
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html>
+
+<head>
+    <script>
+        function checkLoginStatus() {
+            fetch('/user', {
+                method: 'GET',
+                credentials: 'include'
+            }).then(response => {
+                if (response.status === 200) {
+                    return response.json();
+                } else {
+                    throw new Error('Failed to get user info.');
+                }
+            }).then(user => {
+                // 根据用户信息修改页面内容
+                var loginButton = document.getElementById('loginButton');
+                var logoutButton = document.getElementById('logoutButton');
+                if (user != null) {
+                    // 用户已登录
+                    loginButton.style.display = 'none';
+                    logoutButton.style.display = 'block';
+                } else {
+                    // 用户未登录
+                    loginButton.style.display = 'block';
+                    logoutButton.style.display = 'none';
+                }
+            }).catch(error => {
+                console.error(error);
+            });
+        }
+    </script>
+
+    <meta charset="utf-8" />
+    <title>Raspberry</title>
+    <link href="../css/square.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../css/swiper.css"/>
+</head>
+<body>
+<!-- 导航栏 -->
+<div id="navigation">
+    <div id="appLOGO">
+        <img id="appPic" src="../img/raspberry.jpg" >
+        <text id="appName">Raspberry</text>
+    </div>
+    <div id="bars">
+        <div id="square">
+            广场
+        </div>
+        <div id="onlineSchool">
+            线上校园
+        </div>
+        <div id="mine">
+            个人主页
+        </div>
+    </div>
+    <div id="profile">
+        <% if(session.getAttribute("user") == null) { %>
+        <form action="../LoginServlet" method="post">
+            <input type="hidden" name="action" value="ask">
+            <button type="submit">登录</button>
+        </form>
+        <% } else { %>
+        <form action="../LogoutServlet" method="post">
+            <button type="submit">注销</button>
+        </form>
+        <% } %>
+        <img id="searchIcon" src="../img/search.png" >
+    </div>
+
+</div>
+
+<!-- 轮播图 -->
+<div id="pp1">
+    <div id="pp2">
+        <img src="../img/3.jpg"/>
+        <img src="../img/3.jpg"/>
+        <img src="../img/3.jpg"/>
+        <img src="../img/3.jpg"/>
+        <img src="../img/3.jpg"/>
+    </div>
+</div>
+
+
+<!-- 四张主题小图 -->
+<div id="fourPic">
+    <img class="oneOfFour" src="../img/1.jpg"/>
+    <img class="oneOfFour" src="../img/2.jpg"/>
+    <img class="oneOfFour" src="../img/4.jpg"/>
+    <img class="oneOfFour" src="../img/5.jpg"/>
+</div>
+
+<!-- 广场主要内容-->
+<div id="squareContent">
+    <!-- 左边主要部分 -->
+    <div id="main">
+        <!-- 选择板块 -->
+        <div id="titles">
+            <div class="titleChoice" id="" style="color: red; font-weight: bold; border-bottom: 2px solid red;">
+                热门推荐
+            </div>
+            <div class="titleChoice" id="">
+                解压板块
+            </div>
+            <div class="titleChoice" id="">
+                交流平台
+            </div>
+            <div class="titleChoice" id="">
+                作业展示
+            </div>
+            <div class="titleChoice" id="">
+                音视书
+            </div>
+        </div>
+        <!-- 单个板块内容 -->
+        <div id="recommend">
+            <!-- 推荐部分1，星座运势 -->
+            <div id="constellation">
+                <div id="consTitles">
+                    <div id="consTitleDate">
+                        <div id="consTitle">
+                            今日运势
+                        </div>
+                        <div id="dates">
+                            <div id="date">
+                                二〇二三四月四日
+                            </div>
+                            <div id="day">
+                                星期二
+                            </div>
+                        </div>
+                    </div>
+                    <div id="more">
+                        更多>
+                    </div>
+                </div>
+                <hr color="#e4e4e4" size="1">
+                <div id="consContent">
+                    <img id="consPic" src="../img/constellation.jpg" >
+                    <div id="consDetail">
+                        双鱼座是十二宫最后一个星座。<br>
+                        他集合了所有星座的优缺点于一身，同时受水象星座的情绪化影响，使他们原来复杂的性格又添加了更复杂的一笔。<br>
+                        双鱼座的人最大的优点是有一颗善良的心。
+                    </div>
+                </div>
+            </div>
+            <!-- 推荐部分2，用户发表的内容 -->
+            <div id="usercontent">
+                <img id="userPic" src="../img/2.jpg" >
+                <div id="userTitleDetail">
+                    <div id="userTitle">
+                        听说要被取代了，我们拿出看家文章和三大 AI 聊了聊
+                    </div>
+                    <!-- 用户数据 -->
+                    <div id="userArtiInfo" >
+                        <!-- 用户信息 -->
+                        <div id="userInfo" >
+                            <img id="userAvatary" src="../img/raspberry.jpg" >
+                            <text>小树莓</text>
+                        </div>
+                        <!-- 点赞评论 -->
+                        <div id="userData" >
+                            <div id="userZan">
+                                <img src="../img/赞.png" style="width: 30px;height: 30px;margin-right: 10px;">
+                                <text>0</text>
+                            </div>
+                            <div id="userComment" >
+                                <img src="../img/评论.png" style="width: 25px;height: 25px;margin-right: 10px;">
+                                <text>0</text>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- 用户发表内容 -->
+
+    </div>
+    <!-- 右边侧面部分 -->
+    <div id="side">
+        <img class="sidePic" src="../img/1.jpg" >
+        <img class="sidePic" src="../img/1.jpg" >
+        <img class="sidePic" src="../img/1.jpg" >
+    </div>
+</div>
+
+
+
+
+
+</body>
+</html>
