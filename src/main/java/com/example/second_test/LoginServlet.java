@@ -1,6 +1,8 @@
 package com.example.second_test;
 
+import com.example.Survey.Survey;
 import com.example.User.User;
+import dao.SurveyDAO;
 import dao.UserDAO;
 
 import java.io.IOException;
@@ -49,6 +51,15 @@ public class LoginServlet extends HttpServlet {
             User user = userDao.findUser(username, password);
             if (user != null) {
                 request.getSession().setAttribute("user", user);
+
+                // Retrieve survey information for the user
+                SurveyDAO surveyDao = new SurveyDAO();
+                Survey survey = surveyDao.findSurveyByUserId(user.getId());
+                if (survey != null) {
+                    // Survey found for the user
+                    request.getSession().setAttribute("survey", survey);
+                }
+
                 response.sendRedirect("./jsp/Square1.jsp");
             } else {
                 response.sendRedirect("jsp/login.jsp");

@@ -53,7 +53,7 @@ public class UserDAO {
             // 如果查询结果集中有记录，则创建对应的User对象
             if (rs.next()) {
                 System.out.println("找到了用户：" + rs.getString("username"));
-                user = new User(rs.getInt("user_id"), rs.getString("password"), rs.getString("username"));
+                user = new User(rs.getInt("user_id"), rs.getString("username"), rs.getString("password"));
             } else {
                 System.out.println("未找到用户：用户名=" + username + ", 密码=" + password);
             }
@@ -105,7 +105,7 @@ public class UserDAO {
             ps.executeUpdate();
             rs = ps.getGeneratedKeys();
             if (rs.next()) {
-                user = new User(rs.getInt(1), password, username);
+                user = new User(rs.getInt(1), username, password);
             }
 
         } catch (SQLException | ClassNotFoundException e) {

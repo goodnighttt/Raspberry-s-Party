@@ -1,4 +1,4 @@
-<%--
+<%@ page import="com.example.User.User" %><%--
   Created by IntelliJ IDEA.
   User: 23605
   Date: 2023/4/7
@@ -28,6 +28,11 @@
                     // 用户已登录
                     loginButton.style.display = 'none';
                     logoutButton.style.display = 'block';
+                    User user = (User) session.getAttribute("user");
+                    String username = user.getUsername();
+                    // var usernameLabel = document.getElementById('usernameLabel');
+                    // usernameLabel.innerText = user.username;
+
                 } else {
                     // 用户未登录
                     loginButton.style.display = 'block';
@@ -66,10 +71,15 @@
         <form action="../LoginServlet" method="post">
             <input type="hidden" name="action" value="ask">
             <button type="submit">登录</button>
+
         </form>
         <% } else { %>
         <form action="../LogoutServlet" method="post">
             <button type="submit">注销</button>
+            <span id="usernameLabel">
+                <p>当前登录用户：<%= ((User) session.getAttribute("user")).getUsername() %></p>
+            </span>
+
         </form>
         <% } %>
         <img id="searchIcon" src="../img/search.png" >

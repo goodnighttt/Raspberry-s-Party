@@ -20,6 +20,9 @@
 						// 用户已登录
 						loginButton.style.display = 'none';
 						logoutButton.style.display = 'block';
+						var usernameLabel = document.getElementById('usernameLabel');
+						usernameLabel.innerText = user.username;
+
 					} else {
 						// 用户未登录
 						loginButton.style.display = 'block';
@@ -53,12 +56,13 @@
 					<!-- 个人主页 -->
 				</div>
 			</div>
+
 			<div id="profile">
 				<form action="../LoginServlet" method="post">
 					<input type="hidden" name="action" value="ask">
 					<button type="submit">登录</button>
 					<button id="logoutButton" style="display: none">注销</button>
-
+					<span id="usernameLabel"></span>
 				</form>
 
 				<img id="searchIcon" src="../img/search.png" >

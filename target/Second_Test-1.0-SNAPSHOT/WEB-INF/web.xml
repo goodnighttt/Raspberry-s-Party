@@ -4,6 +4,11 @@
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
          version="4.0">
 
+    <!--  默认加载页面     -->
+    <welcome-file-list>
+        <welcome-file>html/square1.html</welcome-file>
+    </welcome-file-list>
+
     <!-- 配置登录 Servlet -->
     <servlet>
         <servlet-name>LoginServlet</servlet-name>
