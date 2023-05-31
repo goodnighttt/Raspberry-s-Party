@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+  <meta charset='utf-8' />
+  <title>Create interactive hover effects with Mapbox GL JS</title>
+  <meta name='viewport' content='width=device-width, initial-scale=1' />
+  <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.js'></script>
+  <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.css' rel='stylesheet' />
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+    }
+
+    #map {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 100%;
+    }
+	/* 边栏 */
+	.quake-info {
+	  position: absolute;
+	  font-family: sans-serif;
+	  margin-top: 5px;
+	  margin-left: 5px;
+	  padding: 5px;
+	  width: 30%;
+	  border: 2px solid black;
+	  font-size: 14px;
+	  color: #222;
+	  background-color: #fff;
+	  border-radius: 3px;
+	}
+	.marker {
+	  /* background-image: url('爆炸.PNG'); */
+	  background-color: #FF0000;
+	  width: 10px;
+	  height: 10px;
+	  /* background-size: cover; */
+	  
+	  border-radius: 50%;
+	  cursor: pointer;
+			/* 设置透明度为 0.5 */
+			/* background-color: rgba(255, 0, 0, 0.1); */
+			
+	}
+  </style>
+</head>
+<body>
+	<!-- 创建地图 -->
+  <div id='map'></div>
+  <!-- 添加边栏 -->
+  <div class='quake-info'>
+    <div><strong>Magnitude:</strong> <span id='mag'></span></div>
+    <div><strong>Location:</strong> <span id='loc'></span></div>
+    <div><strong>Date:</strong> <span id='date'></span></div>
+  </div>
+
+  <script>
+    mapboxgl.accessToken = 'pk.eyJ1Ijoiam9yZW85IiwiYSI6ImNsZzFvOGh2czBmNmszam84M3IzbW9jeXMifQ.cOwgxEZBf5njYbc8XnH4CQ';
+    const map = new mapboxgl.Map({
+      container: 'map', // Specify the container ID
+      style: 'mapbox://styles/joreo9/cli0do7nl005b01o70g7b4tuz', // Specify which map style to use
+      center: [118.8, 32], // Specify the starting position [lng, lat]
+      zoom: 8 ,// Specify the starting zoom
+	  pitch: 70 ,// 设置初始倾斜角度
+	  bearing: -30 // 设置初始左右旋转角度为90度
+    }); 
+	// 边栏定位
+	const magDisplay = document.getElementById('mag');
+	const locDisplay = document.getElementById('loc');
+	const dateDisplay = document.getElementById('date');
+
+
+	// 异步加载 GeoJSON 文件，并将其作为地图的数据源
+
+ 
+	
+	map.on('load', () => {
+	  fetch('output_utf8.geojson')
+	    .then(response => response.json())
+	    .then(data => {
+	      map.addSource('my-data-source', {
+	        type: 'geojson',
+	        data: {
+	                  type: 'FeatureCollection',
+	                  features: data.map(item => ({
+	                    type: 'Feature',
+	                    geometry: {
+	                      type: 'Point',
+	                      coordinates: [item.longitude, item.latitude]
+	                    },
+	                    properties: item
+	                  }))
+	                }
+	      });
+	  	console.log('JSON 数据导入成功:', data);
+		// 获取经纬度
+		// for (let i=0;i<data.length;i++) {
+		//   const el = document.createElement('div');
+		//   el.className = 'marker';
+		//   new mapboxgl.Marker(el)
+		// 	.setLngLat([data[i].longitude, data[i].latitude])
+		// 	.addTo(map); 
+		// }
+		
+		map.addLayer({
+			id:'place',
+			type:'circle',
+			source: 'my-data-source',
+			 paint: {
+			          'circle-stroke-color': '#000',
+			          'circle-stroke-width': 1,
+			          'circle-color': '#000'
+			        }
+		})
+		
+		
+		// data.forEach(place => {
+		// 	const longitude = parseFloat(place.longitude);
+		// 	const latitude = parseFloat(place.latitude);
+
+		// 	// 创建地点的图标元素
+		// 	const el = document.createElement('div');
+		// 	el.className = 'marker';
+
+		// 	// 创建地点的标记
+		// 	new mapboxgl.Marker(el)
+		// 	  .setLngLat([longitude, latitude])
+		// 	  .addTo(map);
+		// });
+		  
+	
+	  	})
+	  .catch(error => {
+	    console.error('无法加载 JSON 文件:', error);
+	  });
+	  
+
+	  
+	});
+	
+	
+	// 鼠标悬停
+	let quakeID = null;
+	
+	
+	
+	map.on('mousemove', 'place', (event) => {
+		console.log(event.features[0].properties)
+	   map.getCanvas().style.cursor = 'pointer';
+	  
+	  // Set constants equal to the current feature's magnitude, location, and time
+	  const quakeMagnitude = event.features[0].properties.地名;
+	  const quakeLocation = event.features[0].properties.地名描述;
+	  const quakeDate = new Date(event.features[0].properties.time);
+	
+	  // Check whether features exist
+	  if (event.features.length === 0) return;
+	  // Display the magnitude, location, and time in the sidebar
+	  magDisplay.textContent = quakeMagnitude;
+	  locDisplay.textContent = quakeLocation;
+	  dateDisplay.textContent = quakeDate;
+	
+	  // If quakeID for the hovered feature is not null,
+	  // use removeFeatureState to reset to the default behavior
+	  if (quakeID) {
+	    map.removeFeatureState({
+	      source: 'earthquakes',
+	      id: quakeID
+	    });
+	  }
+	
+	  quakeID = event.features[0].id;
+	
+	  // When the mouse moves over the earthquakes-viz layer, update the
+	  // feature state for the feature under the mouse
+	  map.setFeatureState(
+	    {
+	      source: 'earthquakes',
+	      id: quakeID
+	    },
+	    {
+	      hover: true
+	    }
+	  );
+	});
+
+  </script>
+
+</body>
+</html>        

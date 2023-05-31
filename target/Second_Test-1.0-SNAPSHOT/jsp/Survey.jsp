@@ -1,11 +1,3 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: 23605
-  Date: 2023/4/7
-  Time: 11:25
-  To change this template use File | Settings | File Templates.
---%>
-<%--<%@ page contentType="text/html;charset=UTF-8" language="java" %>--%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -29,19 +21,6 @@
             background-repeat: no-repeat;
             z-index: -2;
         }
-        /*.bg-image {*/
-        /*    position: fixed;*/
-        /*    top: 40%;*/
-        /*    left: 50%;*/
-        /*    transform: translate(-50%, -50%);*/
-        /*    width: 80%;*/
-        /*    height: 80%;*/
-        /*    background-image: url("../img/底图.png");*/
-        /*    background-size: cover;*/
-        /*    background-repeat: no-repeat;*/
-        /*    filter: opacity(0.7);*/
-        /*    z-index: -1;*/
-        /*}*/
 
         /* 定义调查表单容器 */
         .survey-container {
@@ -100,17 +79,17 @@
 <div class="bottom-bg"></div>
 <div class="survey-container">
     <h1 class="red-title">问卷调查</h1>
-    <form action="../SurveyServlet" method="post">
+    <form action="../SurveyServlet" method="post" accept-charset="UTF-8">
         <label for="movie">你最近看的电影是什么？</label>
         <input type="text" name="movie" id="movie">
         <label for="song">你最近在听什么歌曲？</label>
         <input type="text" name="song" id="song">
         <label for="grade">你目前的年级？</label>
         <select name="grade" id="grade">
-            <option value="Grade One">大一</option>
-            <option value="Grade Two">大二</option>
-            <option value="Grade Three">大三</option>
-            <option value="Grade Four">大四</option>
+            <option value="大一">大一</option>
+            <option value="大二">大二</option>
+            <option value="大三">大三</option>
+            <option value="大四">大四</option>
 <%--            <option value="研一">研一</option>--%>
 <%--            <option value="研二">研二</option>--%>
 <%--            <option value="研三">研三</option>--%>

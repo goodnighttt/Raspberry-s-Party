@@ -2,6 +2,7 @@ package dao;
 
 import com.example.User.User;
 
+import java.io.InputStream;
 import java.sql.*;
 
 public class UserDAO {
@@ -31,7 +32,7 @@ public class UserDAO {
             System.out.println("连接jdbc成功");
 
             // 获取数据库连接
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/mysql?useUnicode=true&characterEncoding=UTF-8", "root", "root");
+            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/javaweb?useUnicode=true&characterEncoding=UTF-8", "root", "root");
             if (conn == null) {
                 // 获取数据库连接失败
             } else {
@@ -46,14 +47,10 @@ public class UserDAO {
             ps.setString(2, password);
             rs = ps.executeQuery();
 
-//            System.out.println("user_id: " + rs.getInt("user_id"));
-//            System.out.println("username: " + rs.getString("username"));
-//            System.out.println("password: " + rs.getString("password"));
-
             // 如果查询结果集中有记录，则创建对应的User对象
             if (rs.next()) {
                 System.out.println("找到了用户：" + rs.getString("username"));
-                user = new User(rs.getInt("user_id"), rs.getString("username"), rs.getString("password"));
+                user = new User(rs.getInt("user_id"), rs.getString("username"), rs.getString("password"),rs.getBytes("profile_pic"));
             } else {
                 System.out.println("未找到用户：用户名=" + username + ", 密码=" + password);
             }
@@ -102,10 +99,12 @@ public class UserDAO {
             ps = conn.prepareStatement(INSERT_USER_SQL, Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, username);
             ps.setString(2, password);
+
             ps.executeUpdate();
             rs = ps.getGeneratedKeys();
             if (rs.next()) {
-                user = new User(rs.getInt(1), username, password);
+//                user = new User(rs.getInt(1), username, password);
+                user = new User(rs.getInt(1), username, password, null);  // For now, we are passing null for profilePic
             }
 
         } catch (SQLException | ClassNotFoundException e) {
@@ -130,6 +129,47 @@ public class UserDAO {
         // 返回User对象，如果插入失败，则返回null
         return user;
     }
+
+    private static final String INSERT_IMAGE_SQL = "UPDATE users SET profile_pic = ? WHERE username = ?";
+
+    public boolean addImage(String username, InputStream image) throws ClassNotFoundException {
+        System.out.println("addImage() called");
+        boolean rowUpdated = false;
+        // 加载数据库驱动程序
+        Class.forName("com.mysql.cj.jdbc.Driver");
+        try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/javaweb", "root", "root");
+             PreparedStatement preparedStatement = connection.prepareStatement(INSERT_IMAGE_SQL)) {
+            preparedStatement.setBlob(1, image);
+            preparedStatement.setString(2, username);
+            rowUpdated = preparedStatement.executeUpdate() > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return rowUpdated;
+    }
+
+    public byte[] getImage(String username) throws ClassNotFoundException {
+        // 加载数据库驱动程序
+        Class.forName("com.mysql.cj.jdbc.Driver");
+        String query = "SELECT profile_pic FROM users WHERE username = ?";
+        try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/javaweb", "root", "root");
+             PreparedStatement ps = connection.prepareStatement(query)) {
+
+            ps.setString(1, username);
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                Blob blob = rs.getBlob("profile_pic");
+                return blob.getBytes(1, (int) blob.length());
+            } else {
+                return null;  // or return a default image
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
 
 
 }

@@ -1,0 +1,48 @@
+
+* {
+	padding: 0;
+	margin: 0;
+	
+}
+
+/* 导航栏 */
+#navigation{display: flex;flex-direction: row;justify-content: space-between;align-items: center;background-color: #df414c;color: #e2706a;padding: 10px 50px;}
+
+#appLOGO{display: flex;flex-direction: row;align-items: center;}
+#appPic{border-radius: 50%;width: 5vw;object-fit: fill;margin-right: 10px;}
+
+
+#profile{display: flex;flex-direction: row;align-items: center;}
+
+/* 首图 */
+.part{position: absolute;width: 25vw;object-fit: fill;transition-duration: 1s;}
+.part:hover{transform: rotate(-20deg) scale(1.2);}
+#scroll{animation: scrolling infinite 30s linear;}
+@keyframes scrolling{
+	0%{transform: translateX(90vw);}
+	100%{transform: translateX(-80vw);}
+}
+.bubble{position: absolute;animation: pop infinite 3s ease-in-out;}
+@keyframes pop{
+	0%{
+		transform: translateY(0);
+	}
+	50%{
+		transform: translateY(5vh);
+	}
+	100%{
+		transform: translateY(0);
+	}
+	
+}
+.arrow{position: absolute;}
+#name{font-size: 2vw;color: #000000;position: absolute;transition: 1s;}
+/* 下拉框 */
+.infomation{background-color: #e2706a;border-radius: 10px;position: absolute;right: 10vw;top: 45vh;font-size: 3vw;display: flex;flex-direction: column;justify-content: center;}
+.list{text-align: center;line-height: 80px;width: 25vw;cursor: pointer;transition: 0.3s;line-height: 0;height: 0;transition: 0.3s;opacity: 0;}
+.list:hover{background-color: #F0F8FF;height: 100px;opacity: 1;}
+
+/* 内容 */
+.box{transform: translateX(400%);transition-duration: 1s;}
+.box:nth-of-type(even){transform: translateX(-400%);}
+.box.show{transform: translateX(0);}

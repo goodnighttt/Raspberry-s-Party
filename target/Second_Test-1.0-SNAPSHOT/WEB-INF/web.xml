@@ -12,7 +12,7 @@
     <!-- 配置登录 Servlet -->
     <servlet>
         <servlet-name>LoginServlet</servlet-name>
-        <servlet-class>com.example.second_test.LoginServlet</servlet-class>
+        <servlet-class>com.example.Servlet.LoginServlet</servlet-class>
     </servlet>
 
     <!-- 配置登录 Servlet 的映射路径 -->
@@ -23,7 +23,7 @@
 
     <servlet>
         <servlet-name>SurveyServlet</servlet-name>
-        <servlet-class>com.example.second_test.SurveyServlet</servlet-class>
+        <servlet-class>com.example.Servlet.SurveyServlet</servlet-class>
     </servlet>
 
     <!-- 配置登录 Servlet 的映射路径 -->
@@ -31,4 +31,30 @@
         <servlet-name>SurveyServlet</servlet-name>
         <url-pattern>/SurveyServlet</url-pattern>
     </servlet-mapping>
+
+    <!-- 配置登录 MovieServlet 的映射路径 -->
+    <servlet>
+        <servlet-name>MovieServlet_test</servlet-name>
+        <servlet-class>com.example.Servlet.MovieServlet_test</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>MovieServlet_test</servlet-name>
+        <url-pattern>/MovieServlet_test</url-pattern>
+    </servlet-mapping>
+
+
+
+    <filter>
+        <filter-name>CorsFilter</filter-name>
+        <filter-class>org.apache.catalina.filters.CorsFilter</filter-class>
+        <init-param>
+            <param-name>cors.allowed.origins</param-name>
+            <param-value>*</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>CorsFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
 </web-app>

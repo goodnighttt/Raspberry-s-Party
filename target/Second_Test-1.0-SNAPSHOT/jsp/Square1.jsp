@@ -1,60 +1,50 @@
-<%@ page import="com.example.User.User" %><%--
-  Created by IntelliJ IDEA.
-  User: 23605
-  Date: 2023/4/7
-  Time: 13:17
-  To change this template use File | Settings | File Templates.
---%>
+<%@ page import="com.example.User.User" %>
+<%@ page import="com.example.Movie.Movie" %>
+<%@ page import="java.util.List" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html>
 <head>
-    <script>
-        function checkLoginStatus() {
-            fetch('/user', {
-                method: 'GET',
-                credentials: 'include'
-            }).then(response => {
-                if (response.status === 200) {
-                    return response.json();
-                } else {
-                    throw new Error('Failed to get user info.');
-                }
-            }).then(user => {
-                // 根据用户信息修改页面内容
-                var loginButton = document.getElementById('loginButton');
-                var logoutButton = document.getElementById('logoutButton');
-                if (user != null) {
-                    // 用户已登录
-                    loginButton.style.display = 'none';
-                    logoutButton.style.display = 'block';
-                    User user = (User) session.getAttribute("user");
-                    String username = user.getUsername();
-                    // var usernameLabel = document.getElementById('usernameLabel');
-                    // usernameLabel.innerText = user.username;
 
-                } else {
-                    // 用户未登录
-                    loginButton.style.display = 'block';
-                    logoutButton.style.display = 'none';
-                }
-            }).catch(error => {
-                console.error(error);
-            });
-        }
-    </script>
     <meta charset="utf-8" />
     <title>Raspberry</title>
     <link href="../css/square.css" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../css/swiper.css"/>
+    <script>
+        document.querySelector('#searchIcon').addEventListener('click', function() {
+            var searchBox = document.querySelector('#searchBox');
+            if (searchBox.style.display === 'none') {
+                searchBox.style.display = 'block';
+            } else {
+                searchBox.style.display = 'none';
+            }
+        });
+    </script>
+
 </head>
 <body>
 <!-- 导航栏 -->
 <div id="navigation" style="height: 90px; border-top-left-radius: 70px;border-top-right-radius: 70px;">
+<%--    <div id="appLOGO">--%>
+<%--        <img id="appPic" src="../img/raspberry.jpg" >--%>
+<%--        <text id="appName">Raspberry</text>--%>
+<%--    </div>--%>
     <div id="appLOGO">
+        <%
+            User user = (User) session.getAttribute("user");
+            if (user == null || user.getProfilePic() == null) {
+        %>
         <img id="appPic" src="../img/raspberry.jpg" >
+        <%
+        } else {
+        %>
+        <img id="appPic" src="../ImageServlet" >
+        <%
+            }
+        %>
         <text id="appName">Raspberry</text>
     </div>
+
     <div id="bars">
         <div id="square">
             <!-- 广场 -->
@@ -82,8 +72,27 @@
 
         </form>
         <% } %>
-        <img id="searchIcon" src="../img/search.png" >
     </div>
+    <div id="searchWrapper">
+        <img id="searchIcon" src="../img/search.png" >
+        <div id="searchBox" style="display: none;">
+            <form id="searchForm" action="../SearchUserServlet" method="get">
+                <input type="text" name="username" placeholder="Enter username to search" />
+                <button type="submit">Search</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        document.querySelector('#searchIcon').addEventListener('click', function() {
+            var searchBox = document.querySelector('#searchBox');
+            if (searchBox.style.display === 'none') {
+                searchBox.style.display = 'block';
+            } else {
+                searchBox.style.display = 'none';
+            }
+        });
+    </script>
 </div>
 
 <!-- 轮播图 -->
@@ -113,6 +122,29 @@
     <img class="oneOfFour" src="../img/4.jpg"/>
     <img class="oneOfFour" src="../img/6e1390633559f2b7dd493f4a966639e8b34e2e32b2125-gjhY4e_fw1200.jpg"/>
 </div>
+
+<!-- 推荐电影部分 -->
+<div id="recommendedMovies">
+    <h2>推荐电影</h2>
+    <div class="movieList">
+        <% List<Movie> top10Movies = (List<Movie>) request.getSession().getAttribute("top10Movies");
+            if (top10Movies != null) {
+                for (Movie movie : top10Movies) { %>
+        <div class="movie">
+            <img src="<%= movie.getImageUrl() %>" alt="电影封面">
+            <h3><%= movie.getName() %></h3>
+            <p>导演： <%= movie.getDirector() %></p>
+            <p>演员： <%= movie.getActors() %></p>
+            <p>类型： <%= movie.getGenres() %></p>
+            <p>评分： <%= movie.getRating() %></p>
+            <p>上映时间： <%= movie.getReleaseDate() %></p>
+            <p>简介： <%= movie.getDescription() %></p>
+        </div>
+        <%  }
+        } %>
+    </div>
+</div>
+
 
 <!-- 广场主要内容-->
 <div id="squareContent">

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>User Profile</title>
+</head>
+<body>
+<h2>Welcome, <%= ((User) session.getAttribute("user")).getUsername() %>!</h2>
+
+<form action="../UploadServlet" method="post" enctype="multipart/form-data">
+  <label for="image">Upload your profile picture:</label><br>
+  <input type="file" id="image" name="image" accept="image/*"><br>
+  <input type="submit" value="Upload Image">
+</form>
+
+<div id="profilePic">
+  <img src="../ImageServlet" alt="Your profile picture" />
+</div>
+
+</body>
+</html>
