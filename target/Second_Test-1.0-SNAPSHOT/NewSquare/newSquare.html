@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="./newSquare.js" type="text/javascript" charset="utf-8"></script>
+		<link rel="stylesheet" type="text/css" href="./newSquare.css"/>
+		 <script src="signin.js" type="text/javascript" charset="utf-8"></script>
+		 
+		<style>
+		  body,P{margin:0;padding:0;}
+		  .popup {
+		    display: none;
+		    position: fixed;
+		    top: 0;
+		    left: 0;
+		    width: 100%;
+		    height: 100%;
+		    background-color: rgba(0, 0, 0, 0.5);/*半透明蒙版*/
+		    z-index: 9999;
+		  }
+		
+		  .popup-inner {
+		    position: absolute;
+		    top: 35%;
+		    left: 50%;
+		    transform: translate(-50%, -50%);/*相对于屏幕的位置移动*/
+		    padding: 20px;
+		    text-align: center;/*文字居中*/
+		    max-width: 60%;/*相对于屏幕的大小*/
+		    max-height: 60%;
+		  }
+		
+		  .popup-close {
+		    position: absolute;
+		    top: 5px;
+		    right: 0px;
+		    font-size: 50px;
+		    color: #aaa;
+		    cursor: pointer;
+		  }
+		  .popup-inner li{margin-bottom: 6px;}
+		  .popup-inner li p{ display:inline-block; width: 350px; height: 58px; background-color: #e1deff; border: 1px solid #f6faff; font-size: 20px; line-height: 58px; text-align: center; color: #645488; border-radius: 7px;}
+		  .popup-inner div{font-weight: bold; color: #fff;}
+		  .popup-inner div p{ display:inline-block;}
+		  .popup-inner ul{padding-top: 25px; margin-bottom: 25px;}
+		  .popup-inner h2{font-size: 35px; color: #000000;}
+		  .popup-close{font-size: 200px;}
+		
+		  li{list-style-type: none;}
+		  a{text-decoration: none; color: #f7eeee; font-weight: bold;}
+		  span{font-weight: bold; color: #f7eeee;}
+		</style>
+	</head>
+	<body>
+		
+		
+			
+		
+		<!-- 首图 -->
+		<div id="first" style="position: relative;height:52vh;padding-top: 10vh;">
+			
+			<!-- 泡泡背景图 -->
+			<div id="bubbles" style="margin-top: 5vh;position: relative;">
+				<img class="bubble" src="../img/首页图标2/紫色泡泡2.png" style="top: 4vh;left: 25vw;height: 30vh;">
+				<img class="bubble" src="../img/首页图标2/红色泡泡.png" style="top: 45vh;left: -5vw;height: 30vh;">
+				<img class="bubble" src="../img/首页图标2/紫色泡泡.png" style="top: -10vh;right: -8vw;height: 45vh;">
+				<img class="bubble" src="../img/首页图标2/蓝色泡泡.png" style="top: 40vh;right: 17vw;height: 45vh;">
+				<img class="bubble" src="../img/首页图标2/绿色泡泡.png" style="top: 55vh;right: 0vw;height: 30vh;">
+				<img class="bubble" src="../img/首页图标2/黄色泡泡.png" style="top: 50vh;right: 35vw;height: 30vh;">
+			</div>
+			<!-- 泡泡按钮 -->
+			<div id="buttons" style="margin-top: 2.5vh;position: relative;">
+				<img class="part" id="music" onmouseover="this.style.cursor='pointer'"   src="../img/推荐.png" style="top: 0;left: 3vw;">
+				<img class="part" id="sign" onmouseover="this.style.cursor='pointer'" onclick="HI()"  src="../img/树莓.png" style="top:1vh;right: 3vw;width: 20vw;">
+				<img class="part" id="study" onmouseover="this.style.cursor='pointer'" src="../img/学习.png" style="left: 40vw;top:5vh;">
+				<img class="part" id="release" onmouseover="this.style.cursor='pointer'"  src="../img/解压.png" style="top:25vh;left: 20vw;">
+				
+				<div id="arrows" style="margin-top: 0vh;position: relative;">
+					<img class="arrow" src="../img/首页图标2/箭头1.png" style="top: 60vh;left: 40vw;height: 13vh;">
+					<img class="arrow" src="../img/首页图标2/箭头2.png" style="top: 3vh;left: 1vw;height: 10vh;">
+					<img class="arrow" src="../img/首页图标2/箭头3.png" style="top: 5vh;left: 58vw;height: 10vh;">
+				</div>
+				
+				<!-- <img src="../img/首页图标2/气泡.png" style="top: 18vh;left: 70vw;height: 13vh;position: absolute;"> -->
+				<img class="hibub" src="../img/首页图标2/气泡.png" style="top: 18vh;left: 85vw;height: 0vh;position: absolute;transition: 0.5s;">
+				
+			</div>
+			
+			
+			
+		</div>
+		
+		<!-- 主要内容 -->
+		<div id="recommend" style="position: relative;margin-top: 24vh;">
+			<img src="../img/2标题.png" style="width: 80vw;object-fit: fill;position: relative;">
+			<img src="../img/大树莓.png" style="width: 80%;object-fit: fill;position: absolute;top: 10vh;left: 10%;margin-top: 310px;z-index: -10;" >
+			<div id="content">
+				<!-- 左侧1 -->
+				<div class="box" style="display: flex;flex-direction: row;padding-left: 1vw;padding-right: 1vw;">
+					<div id="leftImg" >
+						<img  class="contentImg" src="../img/6e1390633559f2b7dd493f4a966639e8b34e2e32b2125-gjhY4e_fw1200.jpg" >
+					</div>
+					<div id="rightMessage">
+						<img class="contentText"  src="../img/2文字框.png" >
+						<div class="text" style="position: absolute;top: 0;">
+							<div class="title" >五一去哪里玩？这些宝藏地点等你发现！</div>
+
+						</div>
+						
+					</div>
+				</div>
+				
+				<div class="box" style="display: flex;flex-direction: row;padding-left: 1vw;padding-right: 1vw;">
+					<div id="tightMessage2">
+						<img class="contentText"  src="../img/2文字框.png" >
+						<div class="text" style="position: absolute;top: 0;">
+							<div class="title" >五一去哪里玩？这些宝藏地点等你发现！</div>
+							
+						</div>
+					</div>
+					<div id="leftImg2" >
+						<img class="contentImg"  src="../img/6e1390633559f2b7dd493f4a966639e8b34e2e32b2125-gjhY4e_fw1200.jpg" >
+					</div>
+				</div>
+				
+				<div class="box" style="display: flex;flex-direction: row;padding-left: 1vw;padding-right: 1vw;">
+					<div id="leftImg3" >
+						<img class="contentImg"  src="../img/6e1390633559f2b7dd493f4a966639e8b34e2e32b2125-gjhY4e_fw1200.jpg" >
+					</div>
+					<div id="tightMessage3">
+						<img  class="contentText" src="../img/2文字框.png" >
+						<div class="text" style="position: absolute;top: 0;">
+							<div class="title" >五一去哪里玩？这些宝藏地点等你发现！</div>
+	
+						</div>
+					</div>
+				</div>
+			
+			</div>
+			<!-- <img src="../img/2底部标题.png" style="height: 300px;object-fit: fill;position: relative;right: -600px;"> -->
+		
+		</div>
+				
+		
+	
+	
+	
+	
+		<!-- 导航栏 -->
+		<div id="navigation" style="height: 10vh; border-top-left-radius: 60px;border-top-right-radius: 60px;position: fixed;top: 0;width: 97vw;">
+			<div id="appLOGO">
+				<img id="appPic" src="../img/首页图标2/LOGOPic.png" style="margin-left: -1vw;">
+				<img src="../img/首页图标2/logo.png" style="height: 4vw;">
+				<!-- <text id="appName" style="font-size: 1.6vw;margin-left: 0.5vw;" >Raspberry</text> -->
+			</div> 
+			<div id="profile">
+				<img src="../img/首页图标2/搜索栏.png" style="height: 3.5vw;margin-right: 0.8vw;">
+				<img src="../img/首页图标2/加号图标.png"  style="width: 3.5vw;margin-right: 1.5vw;">
+				<img src="../img/首页图标2/用户图标.png"  style="width: 3.5vw;margin-right: 1.5vw;cursor: pointer;" id="toProfile">
+				<!-- <img id="searchIcon" src="../img/search.png" > -->
+				<!-- <button id="login" type="button" style="padding: 1vw 2vh;border-radius: 50%;font-size: 1vw;background-color:#e2706a ;color: white;border: 5px dotted  white;">登录</button> -->
+			</div>  
+		</div>
+		<!-- 滚动文字 -->
+		<div id="scroll" style="display: flex;flex-direction: column;align-items: center;position: fixed;top: 10vh;">
+			<img src="../img/首页图标2/滚动条.png" style="width: 70vw;margin-top: 1.5vh;z-index: 1000;">
+		</div>
+		<!-- 签到+回到最上 -->
+		<img src="../img/首页图标2/签到.png" onclick="Popup()" style="position: fixed;right: 2vw;bottom: 8vw;width: 4vw;">
+		<img  src="../img/首页图标2/向上.png" style="position: fixed;right: 2vw;bottom: 3vw;width: 4vw;">
+		
+		
+		
+		<!-- 弹窗签到 -->
+		<div class="popup" id="popup">
+		  <div class="popup-inner" style="margin-top: 9vh;"> <span class="popup-close" onclick="closePopup()" >&times;</span>
+		      <img class="sign-image" id="image" width="1546.6" height="1733.8" onclick="nextpic()" src="../src/签到.png"  />
+		    <h2 style="font-size: 2vw;">每日签到</h2>
+		    <!-- 每日签到 -->
+		    <div class="sign-content">
+		      <!-- 签到时间 -->
+		      <div class="sign-time" style="font-size: 1vw;"><span id="todays">签到</span></div>
+		    </div>
+		    </div>
+		</div>
+		
+	</body>
+</html>

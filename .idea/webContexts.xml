@@ -3,11 +3,14 @@
   <component name="WebContextManager">
     <option name="state">
       <map>
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/Login/login.jsp" value="file://$PROJECT_DIR$/src/main/webapp/Login" />
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/Page/page.jsp" value="file://$PROJECT_DIR$/src/main/webapp/Page" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/html/Uploadhead.html" value="file://$PROJECT_DIR$/src/main/webapp/html" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/html/square.html" value="file://$PROJECT_DIR$/src/main/webapp/html" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/html/square1.html" value="file://$PROJECT_DIR$/src/main/webapp/html" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/index.jsp" value="file://$PROJECT_DIR$/src/main/webapp" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/jsp/Square1.jsp" value="file://$PROJECT_DIR$/src/main/webapp/jsp" />
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/mine/mine.jsp" value="file://$PROJECT_DIR$/src/main/webapp/mine" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/square/newSquare.html" value="file://$PROJECT_DIR$/src/main/webapp/square" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/square/newSquare.jsp" value="file://$PROJECT_DIR$/src/main/webapp/square" />
       </map>

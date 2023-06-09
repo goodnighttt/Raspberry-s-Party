@@ -5,15 +5,15 @@ import java.util.List;
 public class Survey {
     private int userId;
     private String movie;
-    private List<MovieJson> movieList;
+
     private String song;
     private String grade;
     private String favoriteCourse;
 
-    public Survey(int userId, String movie, List<MovieJson> movieList, String song, String grade, String favoriteCourse) {
+    public Survey(int userId, String movie, String song, String grade, String favoriteCourse) {
         this.userId = userId;
         this.movie = movie;
-        this.movieList = movieList;
+
         this.song = song;
         this.grade = grade;
         this.favoriteCourse = favoriteCourse;
@@ -27,9 +27,7 @@ public class Survey {
         return movie;
     }
 
-    public List<MovieJson> getMovieList() {
-        return movieList;
-    }
+
 
     public String getSong() {
         return song;

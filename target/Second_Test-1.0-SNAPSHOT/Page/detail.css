@@ -1,0 +1,12 @@
+
+* {
+	padding: 0;
+	margin: 0;
+	
+}
+
+/* 导航栏 */
+#navigation{display: flex;flex-direction: row;justify-content: space-between;align-items: center;background-color: #df414c;color: #e2706a;padding: 10px 50px;}
+
+#appLOGO{display: flex;flex-direction: row;align-items: center;}
+#appPic{border-radius: 50%;width: 5vw;object-fit: fill;margin-right: 10px;}

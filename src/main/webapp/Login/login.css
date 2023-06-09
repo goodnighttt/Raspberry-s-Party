@@ -1,0 +1,23 @@
+*{margin: 0;padding: 0;}
+body{width: 100vw;height: 100vh;}
+/* 星星 */
+.star{position: absolute;animation: pop infinite 3s ease-in-out;}
+@keyframes pop{
+	0%{
+		transform: translateY(0);
+	}
+	50%{
+		transform: translateY(2.7vh);
+	}
+	100%{
+		transform: translateY(0);
+	}
+	
+}
+
+/* 旋转 */
+#scroll{animation: scrolling infinite 30s linear;}
+@keyframes scrolling{
+	0%{transform: rotate(0);}
+	100%{transform: rotate(180deg);}
+}

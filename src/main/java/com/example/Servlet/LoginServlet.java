@@ -1,9 +1,11 @@
 package com.example.Servlet;
 
 import com.example.Movie.Movie;
+import com.example.Page.Page;
 import com.example.Service.MovieRecommendationService;
 import com.example.Survey.Survey;
 import com.example.User.User;
+import dao.PageDAO;
 import dao.SurveyDAO;
 import dao.UserDAO;
 
@@ -28,7 +30,7 @@ public class LoginServlet extends HttpServlet {
         String action = request.getParameter("action");
         if (action != null && action.equals("ask")) {
             // 如果 action 参数是 "ask"，做一些处理
-            response.sendRedirect("jsp/login.jsp");
+            response.sendRedirect("Login/login1.jsp");
 //            // 例如，这里可以设置一些属性到 request 对象，然后转发到其他的 JSP 页面
 //            request.setAttribute("attributeName", "attributeValue");
 //            RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/somepage.jsp");
@@ -47,7 +49,7 @@ public class LoginServlet extends HttpServlet {
 
         if("ask".equals(action))
         {
-            response.sendRedirect("jsp/login.jsp");
+            response.sendRedirect("Login/login1.jsp");
         }
 
         if ("login".equals(action)) {
@@ -58,6 +60,7 @@ public class LoginServlet extends HttpServlet {
             System.out.println("password: " + password);
             UserDAO userDao = new UserDAO();
             User user = userDao.findUser(username, password);
+//            request.getSession().setAttribute("user", user);
             System.out.println("user: " + user);
             if (user != null) {
                 request.getSession().setAttribute("user", user);
@@ -65,11 +68,19 @@ public class LoginServlet extends HttpServlet {
                 //去数据库中查询该用户的问卷信息，并获得电影推荐
                 SurveyDAO surveyDao = new SurveyDAO();
                 Survey survey = surveyDao.findSurveyByUserId(user.getId());
+//                request.getSession().setAttribute("survey", survey);
+                String movieName = survey.getMovie();
+
+//                response.setContentType("text/plain");
+//                response.setCharacterEncoding("UTF-8");
+//                response.getWriter().write(movieName);
+
+//                response.sendRedirect("Survey/survey.jsp");
                 if (survey != null) {
                     // Survey found for the user
                     request.getSession().setAttribute("survey", survey);
                     // Get movie recommendations
-                    String movieName = survey.getMovie();
+//                    String movieName = survey.getMovie();
                     System.out.println("电影名称：" + movieName);
                     Gson gson = new Gson();
                     MovieRecommendationService recommendationService = new MovieRecommendationService();
@@ -82,15 +93,20 @@ public class LoginServlet extends HttpServlet {
                     String top10MoviesJson = gson.toJson(top10Movies);
                     System.out.println("top10MoviesJson: " + top10MoviesJson);
                     request.getSession().setAttribute("top10MoviesJson", top10MoviesJson);
-//                    request.getRequestDispatcher("./jsp/recommendations.jsp").forward(request, response);
-                response.sendRedirect("square/newSquare.jsp");
+//                    request.getRequestDispatcher("./jsp/recommendation.jsp").forward(request, response);
 
-//                    request.getRequestDispatcher("./jsp/recommendations.jsp").forward(request, response);
+                    // 获取最近三条记录的Page对象列表
+                    List<Page> recentPages = PageDAO.getRecentPages(3);
+//                    System.out.println("recentPages: " + recentPages);
+                    request.getSession().setAttribute("recentPages", recentPages);
+                    response.sendRedirect("NewSquare/newSquare1.jsp");
+
+//                    request.getRequestDispatcher("./jsp/recommendation.jsp").forward(request, response);
 //                    System.out.println(top10Movies);
                 }
 
             } else {
-                response.sendRedirect("jsp/login.jsp");
+                response.sendRedirect("Login/login1.jsp");
             }
         } else if ("register".equals(action)) {
             // 处理注册请求
@@ -102,7 +118,7 @@ public class LoginServlet extends HttpServlet {
                 request.getSession().setAttribute("user", user);
                 response.sendRedirect("jsp/Survey.jsp");
             } else {
-                response.sendRedirect("jsp/login.jsp");
+                response.sendRedirect("Login/login1.jsp");
             }
         }
     }

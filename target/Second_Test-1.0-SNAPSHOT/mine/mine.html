@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>个人主页</title>
+		<link rel="stylesheet" type="text/css" href="mine.css"/>
+	</head>
+	<body>
+		
+		<div id="all">
+			<img src="../img/个人主页/白色底图.png" style="width: 64vw;margin-top: 24vh;margin-left: 13vw;position: absolute;">
+			<img src="../img/个人主页/人物.png" style="width: 30vw;position: absolute;right: 4vw;top: 7.5vh;">
+			<img src="../img/个人主页/问号.png" style="width: 7vw;position: absolute;right: 23vw;top: 22vh;cursor: pointer;z-index: 100;" id="book">
+			<div id="inbox" style="width: 64vw;height: 60vh;margin-top: 24vh;margin-left: 13vw;position: absolute;">
+				<!-- 主要内容框 -->
+				<div id="inbox1">
+					<!-- 上半部分 -->
+					<img src="../img/个人主页/头像.png" style="position: absolute;left: 2vw;top: -4vw;width: 11.5vw;">
+					<div id="nameAbout" style="position: absolute;top: 6vh;left: 14.5vw;display: flex;flex-direction: row;align-items: center;">
+						<div id="name" style="font-size: 3vw;">EVERYBODYSOS</div>
+						<img src="../img/个人主页/编辑按钮.png" style="width: 8vw;height: 5.5vh;object-fit: fill;margin-left: 1.3vw;">
+					</div>
+					
+					<!-- 下半部分 -->
+					<div id="down" style="position: absolute;top: 20vh;display: flex;flex-direction: row;">
+						<div id="left">
+							<div id="inter" style="display: flex;flex-direction: row;">
+								<div class="inters" id="focus" >
+									<div class="interKind" id="">关注</div>
+									<div class="interNum" id="">25</div>
+								</div>
+								<div class="inters" id="fans">
+									<div class="interKind" id="">粉丝</div>
+									<div class="interNum" id="">100</div>
+								</div>
+								<div class="inters" id="articles">
+									<div class="interKind" id="">文章</div>
+									<div class="interNum" id="">2</div>
+								</div>
+								<div class="inters" id="collect">
+									<div class="interKind" id="">收藏</div>
+									<div class="interNum" id="">30</div>
+								</div>
+							</div>
+							<div id="photos" style="display: flex;flex-direction: row;">
+								<img src="../img/个人主页/照片墙.png" style="margin-left: 2.8vw;margin-top: 3vh;width: 18vw;">
+								<img src="../img/个人主页/照片墙.png" style="margin-left: 1vw;margin-top: 3vh;width: 18vw;">
+							</div>
+						</div>
+						<div id="right" style="display: flex;flex-direction: row;margin-left: 2vw;">
+							<div id="nums">
+								<img src="../img/个人主页/综合.png" style="width: 7vw;margin-top: 8vh;margin-left: 2vw;">
+								<div class="num" id="" style="top: 11.5vh;right: 9.3vw;">2</div>
+								<div class="num" id="" style="top: 22.8vh;right: 9.3vw;">500</div>
+							</div>
+							<img src="../img/个人主页/勋章.png" style="width: 5.5vw;height: 20vh;margin-top: 8vh;margin-left: 2vw;cursor: pointer;" id="honor">
+						</div>
+					</div>
+				</div>
+				
+			</div>
+			
+		</div>
+		
+		
+		
+		<!-- 导航栏 -->
+		<div id="navigation" style="height: 10vh; border-top-left-radius: 80px;border-top-right-radius: 80px;position: fixed;top: 0;width: 98.3vw;">
+			<div id="appLOGO">
+				<img id="appPic" src="../img/首页图标2/LOGOPic.png" style="margin-left: -1vw;cursor: pointer;" onclick="toSquare()">
+				<img src="../img/个人主页/logo.png" style="height: 4vw;">
+				<!-- <text id="appName" style="font-size: 1.6vw;margin-left: 0.5vw;" >Raspberry</text> -->
+			</div> 
+			<div id="profile">
+				<img src="../img/个人主页/搜索.png" style="height: 3.5vw;margin-right: 0.8vw;">
+				<img src="../img/个人主页/加号.png"  style="width: 3.5vw;margin-right: 1.5vw;">
+				<img src="../img/个人主页/用户.png"  style="width: 3.5vw;margin-right: 1.5vw;">
+				
+			</div>  
+		</div>
+		
+		<!-- 书 -->
+		<div id="mybook" style="position: absolute;top: 28vh;left: 72vw;scale: 0.1;">
+			<div id="cover">
+				<!-- <span id="title"></span> -->
+			</div>
+			<div id="content">
+				<div class="page">
+					<img src="../img/word.PNG" style="width: 4vw;">
+				</div>
+				
+			</div>
+		</div>
+		
+		<script type="text/javascript">
+			const book=document.getElementById('book');
+			const mybook=document.getElementById('mybook');
+			
+			book.onclick=function(){
+				
+				mybook.style.top='40vh';
+				mybook.style.left='42vw';
+				mybook.style.scale='4';
+			}
+			
+			function toSquare(){
+				 window.location.href = '../square/newSquare.html';
+			}
+		</script>
+	</body>
+</html>

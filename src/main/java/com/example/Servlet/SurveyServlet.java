@@ -1,11 +1,17 @@
 package com.example.Servlet;
 
 
+import com.example.Movie.Movie;
+import com.example.Page.Page;
+import com.example.Service.MovieRecommendationService;
 import com.example.Survey.Survey;
 import com.example.User.User;
+import com.google.gson.Gson;
+import dao.PageDAO;
 import dao.SurveyDAO;
 
 import java.io.IOException;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -43,42 +49,33 @@ public class SurveyServlet extends HttpServlet {
         if(survey != null)
         {
             request.getSession().setAttribute("survey", survey);
-            response.sendRedirect("./jsp/Square1.jsp");
+            Gson gson = new Gson();
+            MovieRecommendationService recommendationService = new MovieRecommendationService();
+            List<Movie> top10Movies = null;
+            try {
+                top10Movies = recommendationService.getTop10SimilarMoviesByName(movie);
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            }
+            String top10MoviesJson = gson.toJson(top10Movies);
+            System.out.println("top10MoviesJson: " + top10MoviesJson);
+            request.getSession().setAttribute("top10MoviesJson", top10MoviesJson);
+
+            // 获取最近三条记录的Page对象列表
+            List<Page> recentPages = PageDAO.getRecentPages(3);
+//                    System.out.println("recentPages: " + recentPages);
+            request.getSession().setAttribute("recentPages", recentPages);
+            response.sendRedirect("NewSquare/newSquare1.jsp");
+
         }
         else {
-            response.sendRedirect("jsp/login.jsp");
+            // 获取最近三条记录的Page对象列表
+            List<Page> recentPages = PageDAO.getRecentPages(3);
+//                    System.out.println("recentPages: " + recentPages);
+            request.getSession().setAttribute("recentPages", recentPages);
+            response.sendRedirect("NewSquare/newSquare1.jsp");
+//            response.sendRedirect("jsp/login.jsp");
         }
-
-
-
-//        // 将数据写入数据库
-//        Connection connection = null;
-//        PreparedStatement statement = null;
-//        try {
-//            Class.forName("com.mysql.jdbc.Driver");
-//            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/javaweb?useUnicode=true&characterEncoding=UTF-8", "root", "root");
-//            String query = "INSERT INTO survey (user_id, movie, song, grade, favoritecourse) VALUES (?, ?, ?, ?, ?)";
-//            statement = connection.prepareStatement(query);
-//            statement.setInt(1, userId);
-//            statement.setString(2, movie);
-//            statement.setString(3, song);
-//            statement.setString(4, grade);
-//            statement.setString(5, favoriteCourse);
-//            statement.executeUpdate();
-//        } catch (ClassNotFoundException | SQLException e) {
-//            e.printStackTrace();
-//        } finally {
-//            try {
-//                if (statement != null) {
-//                    statement.close();
-//                }
-//                if (connection != null) {
-//                    connection.close();
-//                }
-//            } catch (SQLException e) {
-//                e.printStackTrace();
-//            }
-//        }
 
 
 

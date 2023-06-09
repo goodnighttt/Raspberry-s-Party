@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <style>
+    table, th, td {
+      border: 1px solid black;
+    }
+  </style>
+</head>
+<body>
+
+<h2>学生课程表</h2>
+
+<form action="../CourseServlet" method="post">
+  <table>
+    <tr>
+      <th>时间\日期</th>
+      <th>周一</th>
+      <th>周二</th>
+      <th>周三</th>
+      <th>周四</th>
+      <th>周五</th>
+      <th>周六</th>
+      <th>周日</th>
+    </tr>
+    <script>
+      const courses = ["选择课程", "语文", "数学", "英语", "物理", "化学", "生物", "历史", "地理", "政治"];
+      for(let i=1; i<=12; i++) {
+        document.write("<tr><td>第" + i + "节课</td>");
+        for(let j=1; j<=7; j++) {
+          document.write("<td><select name='day" + j + "_lesson" + i + "'>");
+          for(let k=0; k<courses.length; k++) {
+            document.write("<option value='" + courses[k] + "'>" + courses[k] + "</option>");
+          }
+          document.write("</select></td>");
+        }
+        document.write("</tr>");
+      }
+    </script>
+  </table>
+  <input type="submit" value="提交课程表">
+</form>
+
+</body>
+</html>

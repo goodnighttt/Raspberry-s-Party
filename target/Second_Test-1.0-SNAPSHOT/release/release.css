@@ -1,0 +1,21 @@
+* {
+	padding: 0;
+	margin: 0;
+	
+}
+
+
+
+/* 导航栏 */
+#navigation{display: flex;flex-direction: row;justify-content: space-between;align-items: center;background-color: white;padding: 10px 50px;}
+
+#appLOGO{display: flex;flex-direction: row;align-items: center;}
+#appPic{border-radius: 50%;width: 5vw;object-fit: fill;margin-right: 10px;}
+
+/* 表情翻转 */
+.face{transition: all 0.5s linear;cursor: pointer;}
+/* .face:hover{transform: rotateY(90deg);} */
+.word{transition: all 1s linear;}
+/* .word:hover{transform: rotateY(0);} */
+.faceclicked{transform: rotateY(90deg);}
+.wordclicked{transform: rotateY(180deg);}

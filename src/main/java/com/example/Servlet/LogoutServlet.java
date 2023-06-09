@@ -25,9 +25,13 @@ public class LogoutServlet extends HttpServlet {
         if (session != null) {
             // 注销用户会话
             session.invalidate();
+            System.out.println("注销成功");
+            //尝试输出session中的user，检测是否注销
+//            System.out.println("user: " + session.getAttribute("user"));
+
         }
 
         // 重定向到登录页面或其他页面
-        response.sendRedirect("./jsp/Square1.jsp");
+        response.sendRedirect("./square/newSquare1.jsp");
     }
 }

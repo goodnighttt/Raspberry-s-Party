@@ -97,8 +97,13 @@ public class MovieRecommendationService {
                         // 从结果集中获取电影属性
                         String name = rs3.getString("name");
                         String director = rs3.getString("director");
+//                        String writer = rs3.getString("author");
                         String writer = rs3.getString("author");
+
                         String actors = rs3.getString("actors");
+                        String[] names = actors.split(" ");
+                        String cleanedactors = String.join(" ", Arrays.copyOfRange(names, 0, Math.min(names.length, 3)));
+
                         String releaseDate = rs3.getString("time");
                         String genres = rs3.getString("type");
                         double rating = rs3.getDouble("rating");
@@ -106,7 +111,7 @@ public class MovieRecommendationService {
                         String imageUrl = rs3.getString("img");
 
                         // 创建Movie对象
-                        Movie movie = new Movie(similarMovieId, name, director, writer, actors, releaseDate, genres, rating, description, imageUrl);
+                        Movie movie = new Movie(similarMovieId, name, director, writer, cleanedactors, releaseDate, genres, rating, description, imageUrl);
                         top10Movies.add(movie);
                     }
                 }

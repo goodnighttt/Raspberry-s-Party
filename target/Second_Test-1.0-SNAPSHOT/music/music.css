@@ -1,0 +1,58 @@
+*{margin: 0;padding: 0;}
+body{background-color: #191919;}
+
+/* 滚动贴合 */
+#container{height: 100vh;width: 100vw;overflow: scroll;scroll-snap-type: y mandatory;}
+.page{width: 100vw;height: 100vh;scroll-snap-align: start;display: flex;}
+
+/* 导航栏 */
+#navigation{display: flex;flex-direction: row;justify-content: space-between;align-items: center;background-color: white;color: #e2706a;padding: 10px 50px;}
+
+#appLOGO{display: flex;flex-direction: row;align-items: center;}
+#appPic{border-radius: 50%;width: 5vw;object-fit: fill;margin-right: 10px;}
+
+/* 旋转 */
+#CD{animation: scrolling infinite 15s linear;}
+@keyframes scrolling{
+	0%{transform: rotate(0);}
+	100%{transform: rotate(180deg);}
+}
+
+/* 箭头 */
+.arrowR{position: absolute;animation: popR infinite 1s ease-in;}
+@keyframes popR{
+	0%{
+		transform: translateX(0);
+	}
+	50%{
+		transform: translateX(1vh);
+	}
+	100%{
+		transform: translateX(0);
+	}
+	
+}
+
+.arrowL{position: absolute;animation: popL infinite 1s ease-in;}
+.arrowR{position: absolute;animation: popL infinite 1s ease-in;}
+@keyframes popL{
+	0%{
+		transform: translateX(0);
+	}
+	50%{
+		transform: translateX(-1vh);
+	}
+	100%{
+		transform: translateX(0);
+	}
+	
+}
+.panelR{transition: 1s ;z-index: 5;}
+.panelL{transition: 1s ;z-index: 5;}
+
+.toRight{
+	transform: translateX(23.1vw);
+}
+.toLeft{
+	transform: translateX(-23.1vw);
+}

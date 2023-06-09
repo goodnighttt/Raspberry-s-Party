@@ -40,6 +40,6 @@ public class MovieServlet_test extends HttpServlet {
         String top10MoviesJson = gson.toJson(top10Movies);
 //                    request.getSession().setAttribute("top10MoviesJson", top10MoviesJson);
         request.getSession().setAttribute("top10MoviesJson", top10MoviesJson);
-        request.getRequestDispatcher("./jsp/recommendations.jsp").forward(request, response);
+        request.getRequestDispatcher("./jsp/recommendation.jsp").forward(request, response);
     }
 }

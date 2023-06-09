@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>解压板块</title>
+		<link rel="stylesheet" type="text/css" href="release.css"/>
+	</head>
+	<body>
+		
+		<div id="all" style="width: 100vw;height: 95vh;background-color: #FDE26D;margin-top: 5vh;">
+			<div id="release" style="display: flex;flex-direction: column;align-items: center;height: 95vh;justify-content: center;">
+				<img src="../img/解压/choose.png" style="width: 30vw;margin-left: -35vw;">
+				<div id="content" style="margin: 2vh;position: relative;">
+					<img src="../img/解压/黑背景.png" style="width: 50vw;object-fit: fill;z-index: -100;">
+					
+					<div id="left" style="">
+						<img src="../img/解压/左上.png" onclick="toTunnel()" style="position: absolute;top: 0.5vw;left: 0.5vw;width: 9.5vw;cursor: pointer;">
+						<img class="face" id="face1" src="../img/解压/上中-表情.png" style="position: absolute;top: 0.5vw;left: 10.5vw;width: 9.5vw;z-index:1">
+						<img class="word" id="word1" src="../img/解压/上中-文字.png" style="position: absolute;top: 0.5vw;left: 10.5vw;width: 9.5vw;;">
+						<img class="face" id="face2" src="../img/解压/右上-表情.png" style="position: absolute;top: 0.5vw;left: 20.5vw;width: 9.5vw;z-index:1">
+						<img class="word" id="word2" src="../img/解压/右上-文字.png" style="position: absolute;top: 0.5vw;left: 20.5vw;width: 9.5vw;">
+						
+						<img src="../img/解压/左中.png" onclick="toStars()" style="position: absolute;top: 10.5vw;left: 0.6vw;width: 9.5vw;cursor: pointer;">
+						<img src="../img/解压/中间.png" onclick="toClock()" style="position: absolute;top: 10.5vw;left: 10.5vw;width: 9.5vw;cursor: pointer;">
+						<img class="face" id="face3" src="../img/解压/右中-表情.png" style="position: absolute;top: 10.5vw;left: 20.5vw;width: 9.5vw;z-index:1">
+						<img class="word" id="word3" src="../img/解压/右中-文字.png" style="position: absolute;top: 10.5vw;left: 20.5vw;width: 9.5vw;">
+						
+						<img class="face" id="face4" src="../img/解压/左下-表情.png" style="position: absolute;top: 20.5vw;left: 0.6vw;width: 9.5vw;z-index:1">
+						<img class="word" id="word4" src="../img/解压/左下-文字.png" style="position: absolute;top: 20.5vw;left: 0.6vw;width: 9.5vw;">
+						<img src="../img/解压/下中.png" onclick="toMouse()" style="position: absolute;top: 20.5vw;left: 10.5vw;width: 9.5vw;cursor: pointer;">
+						<img src="../img/解压/右下.png" onclick="toFlowers()" style="position: absolute;top: 20.5vw;left: 20.5vw;width: 9.5vw;cursor: pointer;">
+						
+						
+					</div>
+					
+					<div id="right" style="position: absolute;right: 2vh;top: 1.3vh;">
+						<img src="../img/解压/字.png" style="width: 18vw;">
+					</div>
+				</div>
+				<img src="../img/解压/click.png"  style="width: 26vw;margin-right: -40vw;">
+				
+				
+			</div>
+			
+			
+			
+		</div>
+		
+		
+		
+		
+		<!-- 导航栏 -->
+		<div id="navigation" style="height: 7vh;width: 97.8vw; border-top-left-radius: 150px;border-top-right-radius: 150px;position: fixed;top: 0;border: solid 0.3vw #FDE26D;">
+			<div id="appLOGO">
+				<!-- <img id="appPic" src="../img/首页图标2/LOGOPic.png" style="margin-left: -1vw;"> -->
+				<img src="../img/解压/logo2.png" style="height: 4vw;margin-left: 2vw;">
+				<!-- <text id="appName" style="font-size: 1.6vw;margin-left: 0.5vw;" >Raspberry</text> -->
+			</div> 
+			<div id="profile">
+				<!-- <img src="../img/首页图标2/搜索栏.png" style="height: 3.5vw;margin-right: 0.8vw;"> -->
+				<!-- <img src="../img/首页图标2/加号图标.png"  style="width: 4vw;margin-right: 1.5vw;"> -->
+				<img src="../img/解压/用户.png"  style="width: 3vw;margin-right: 3vw;cursor: pointer;" id="toProfile">
+				<!-- <img id="searchIcon" src="../img/search.png" > -->
+				<!-- <button id="login" type="button" style="padding: 1vw 2vh;border-radius: 50%;font-size: 1vw;background-color:#e2706a ;color: white;border: 5px dotted  white;">登录</button> -->
+			</div>  
+		</div>
+		
+		
+		<script type="text/javascript">
+			var face1=document.getElementById('face1');
+			var face2=document.getElementById('face2');
+			var face3=document.getElementById('face3');
+			var face4=document.getElementById('face4');
+			
+			var word1=document.getElementById('word1');
+			var word2=document.getElementById('word2');
+			var word3=document.getElementById('word3');
+			var word4=document.getElementById('word4');
+			
+			face1.onclick=function(){
+				face1.classList.add('faceclicked');
+				word1.classList.add('wordclicked');
+			}
+			face2.onclick=function(){
+				face2.classList.add('faceclicked');
+				word2.classList.add('wordclicked');
+			}
+			face3.onclick=function(){
+				face3.classList.add('faceclicked');
+				word3.classList.add('wordclicked');
+			}
+			face4.onclick=function(){
+				face4.classList.add('faceclicked');
+				word4.classList.add('wordclicked');
+			}
+			
+			function toClock(){
+				 window.location.href = './pressureRelease/clock.html';
+			}
+			function toMouse(){
+				 window.location.href = './pressureRelease/mouseTrace.html';
+			}
+			function toStars(){
+				 window.location.href = './pressureRelease/stars.html';
+			}
+			function toFlowers(){
+				 window.location.href = './pressureRelease/thousand_flower.html';
+			}
+			function toTunnel(){
+				 window.location.href = './pressureRelease/tunnel.html';
+			}
+			
+			
+			//跳转个人主页
+			const mineEle=document.getElementById('toProfile');
+			mineEle.onclick=function toStudy(){
+				  	 window.location.href = '../mine/mine.html';
+			}
+		</script>
+	</body>
+</html>

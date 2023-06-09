@@ -9,9 +9,6 @@ public class UserDAO {
 
     private static final String SELECT_USER_SQL = "SELECT * FROM users WHERE username = ? AND password = ?";
 
-//    private static final String INSERT_USER_SQL = "INSERT INTO users (username, password) VALUES (?, ?)";
-
-
     /**
      * 查找用户的方法，用于验证用户身份
      *
@@ -42,7 +39,7 @@ public class UserDAO {
             }
 
             // 创建PreparedStatement对象，设置参数并执行查询
-            ps = conn.prepareStatement(SELECT_USER_SQL);
+            ps = conn.prepareStatement( "SELECT * FROM users WHERE username = ? AND password = ?");
             ps.setString(1, username);
             ps.setString(2, password);
             rs = ps.executeQuery();
@@ -90,21 +87,25 @@ public class UserDAO {
 
         try {
             // 加载数据库驱动程序
+            // 加载MySQL数据库驱动程序
             Class.forName("com.mysql.cj.jdbc.Driver");
 
-            // 获取数据库连接
+            // 获取与数据库的连接
             conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/javaweb", "root", "root");
 
             // 创建PreparedStatement对象，设置参数并执行插入操作
-            ps = conn.prepareStatement(INSERT_USER_SQL, Statement.RETURN_GENERATED_KEYS);
-            ps.setString(1, username);
-            ps.setString(2, password);
+            ps = conn.prepareStatement("INSERT INTO users (username, password) VALUES (?, ?)", Statement.RETURN_GENERATED_KEYS);
+            ps.setString(1, username); // 设置第一个参数为用户名
+            ps.setString(2, password); // 设置第二个参数为密码
 
-            ps.executeUpdate();
-            rs = ps.getGeneratedKeys();
+            ps.executeUpdate(); // 执行更新操作
+            rs = ps.getGeneratedKeys(); // 获取生成的主键
+
             if (rs.next()) {
-//                user = new User(rs.getInt(1), username, password);
-                user = new User(rs.getInt(1), username, password, null);  // For now, we are passing null for profilePic
+                // 从结果集中获取生成的主键值和用户名、密码，创建一个User对象
+                // 使用rs.getInt(1)获取第一列的整数值（生成的主键）
+                // username和password是已经设置好的变量
+                user = new User(rs.getInt(1), username, password, null);  // 目前，我们将profilePic参数设置为null
             }
 
         } catch (SQLException | ClassNotFoundException e) {

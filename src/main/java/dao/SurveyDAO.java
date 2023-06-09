@@ -44,7 +44,7 @@ public class SurveyDAO {
                 System.out.println("喜欢的课程：" + favoriteCourse);
 
                 // 创建Survey对象
-                survey = new Survey(userId, movie, null,song, grade, favoriteCourse);
+                survey = new Survey(userId, movie,song, grade, favoriteCourse);
             } else {
                 System.out.println("未找到用户的调查问卷信息：用户ID=" + userId);
             }
@@ -82,7 +82,7 @@ public class SurveyDAO {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/javaweb?useUnicode=true&characterEncoding=UTF-8", "root", "root");
-            String query = "INSERT INTO survey (user_id, movie, movielist,song, grade, favoritecourse) VALUES (?,?, ?, ?, ?, ?)";
+            String query = "INSERT INTO survey (user_id, movie,song, grade, favoritecourse) VALUES (?,?, ?, ?, ?)";
             statement = conn.prepareStatement(query);
             statement.setInt(1, userId);
             statement.setString(2, movie);
@@ -90,7 +90,7 @@ public class SurveyDAO {
             statement.setString(4, grade);
             statement.setString(5, favoriteCourse);
             statement.executeUpdate();
-            survey = new Survey(userId, movie,null, song, grade, favoriteCourse);
+            survey = new Survey(userId, movie, song, grade, favoriteCourse);
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
         } finally {
